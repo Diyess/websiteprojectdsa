@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Structures - Arrays and Linked Lists</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="pseudocode.css">
+</head>
+<body>
+    
+    <nav> 
+        <img src="" alt="">
+        <ul class="nav">
+            <li><a href="home.html" class="nav-link">HOME</a></li>
+            <li class="nav-item dropdown">
+                <a href="#" class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    LIST
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <li><a class="dropdown-item" href="singlyfront.html">Singly Linked List</a></li>
+                    <li><a class="dropdown-item" href="doublyfront.html">Doubly Linked List</a></li>
+                    <li><a class="dropdown-item" href="circularfront.html">Circular Linked List</a></li>
+                </ul>
+            </li>
+            <li class="nav-item dropdown">
+                <a href="#" class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    ALGORITHM
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <li><a class="dropdown-item" href="algorithmfront.html">Algorithm</a></li>
+                    <li><a class="dropdown-item" href="sortingalgorithmfront.html">Sorting Algorithm</a></li>
+                    
+                </ul>
+            </li>
+
+            <li><a href="pseudocodefront.html" class="nav-link">PSEUDOCODE</a></li>
+            <li><a href="arrayFRONT.html" class="nav-link">ARRAY</a></li>
+            <li><a href="queuesFRONT.html" class="nav-link">QUEUES</a></li>
+            <li><a href="stackfront.html" class="nav-link">STACK</a></li>
+            <li><a href="treefront.html" class="nav-link">TREES</a></li>
+            
+        </ul>
+    </nav>
+
+
+    <!-- Header -->
+    <header class="text-center my-4">
+        <h1 class="display-4">Pseudocode</h1>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container my-4">
+        <!-- Section 1: Arrays -->
+        <section id="sort" class="mb-5">
+            <h2 class="text-success">What is Pseudocode?</h2>
+            <div class="row align-items-center mb-4">
+                <div class="col-md-8">
+                    <p><span>Pseudocode</span> is called false code because it resembles a programming language
+                         but is easy to understand even for someone with little programming knowledge.
+                         It is a <span> method for representing algorithms</span> in a <span>programming-like format</span>
+                          helping programmers outline their logic before actual coding.</p>
+                </div>
+            </div>
+        </section>
+
+        <header class="text-center my-4">
+            <h1 class="display-4">Five Examples of Pseudocode</h1>
+        </header>
+
+        <!-- Section 2: Linked Lists -->
+        <section id="sorting" class="mb-5">
+            <h2 class="text-success">1: Finding the Largest Number in a Listt</h2>
+            <div class="row align-items-center mb-4">
+                <div class="col-md-8">
+                    <p>
+                        &nbsp;&nbsp;&nbsp;&nbsp;START<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;INPUT list of numbers<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SET largest = first number in the list<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;FOR each number in the list<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IF number > largest<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SET largest = number<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ENDIF<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ENDFOR<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;PRINT largest<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;END<br>
+                    </p>
+                </div>
+            </div>
+        </section>
+        
+
+        <!-- Section 3: Singly Linked List -->
+        <section id="sorting" class="mb-5">
+            <h2 class="text-success">2: Calculating Factorial of a Number</h2>
+                <div class="col-md-8">
+            <p>
+                &nbsp;&nbsp;&nbsp;&nbsp;START <br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;INPUT number  <br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SET factorial = 1  <br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;FOR i = 1 TO number  <br>
+                &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SET factorial = factorial * i  <br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ENDFOR  <br>
+                &nbsp;&nbsp;&nbsp;&nbsp;PRINT factorial  <br>
+                &nbsp;&nbsp;&nbsp;&nbsp;END  
+
+            </p>
+        </section>
+
+        
+        <section id="sorting" class="mb-5">
+            <h2 class="text-success">3: Linear Search</h2>
+                <div class="col-md-8">
+            <p>
+                &nbsp;&nbsp;&nbsp;&nbsp;START  <br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;INPUT list of numbers, target  <br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;FOR each number in the list  <br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IF number == target  <br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; PRINT "Found"  <br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; STOP  <br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ENDIF  <br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ENDFOR  <br>
+                &nbsp;&nbsp;&nbsp;&nbsp;PRINT "Not Found"  <br>
+                &nbsp;&nbsp;&nbsp;&nbsp;END  <br>
+
+            </p>
+        </section>
+
+        <section id="sorting" class="mb-5">
+            <h2 class="text-success">4: Checking if a Number is Prime</h2>
+                <div class="col-md-8">
+            <p>
+                &nbsp;&nbsp;&nbsp;&nbsp;START  <br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;INPUT number  <br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SET isPrime = true  <br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;FOR i = 2 TO number-1  <br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IF number % i == 0  <br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SET isPrime = false  <br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;BREAK  <br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ENDIF  <br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ENDFOR  <br>
+                &nbsp;&nbsp;&nbsp;&nbsp;IF isPrime  <br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PRINT "Number is Prime" <br> 
+                &nbsp;&nbsp;&nbsp;&nbsp;ELSE  <br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PRINT "Number is not Prime"  <br>
+                &nbsp;&nbsp;&nbsp;&nbsp;END  <br>
+            </p>
+        </section>
+
+        <section id="sorting" class="mb-5">
+            <h2 class="text-success">5: Reversing a String</h2>
+                <div class="col-md-8">
+            <p>
+                &nbsp;&nbsp;&nbsp;&nbsp; START  <br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NPUT string  <br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SET reversed = ""  <br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;FOR i = length of string TO 1  <br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SET reversed = reversed + character at position i  <br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ENDFOR  <br>
+                &nbsp;&nbsp;&nbsp;&nbsp;PRINT reversed  <br>
+                &nbsp;&nbsp;&nbsp;&nbsp;END  <br>
+              
+            </p>
+        </section>
+
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

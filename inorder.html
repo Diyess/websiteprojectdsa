@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Structures - Arrays and Linked Lists</title>
+    <!-- Bootstrap CSS -->
+    <script src="https://cdn.jsdelivr.net/pyodide/v0.23.4/full/pyodide.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="inorder.css">
+</head>
+<body>
+    
+    <nav> 
+        <img src="" alt="">
+        <ul class="nav">
+            <li><a href="home.html" class="nav-link">HOME</a></li>
+            <li class="nav-item dropdown">
+                <a href="#" class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    LIST
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <li><a class="dropdown-item" href="singlyfront.html">Singly Linked List</a></li>
+                    <li><a class="dropdown-item" href="doublyfront.html">Doubly Linked List</a></li>
+                    <li><a class="dropdown-item" href="circularfront.html">Circular Linked List</a></li>
+                </ul>
+            </li>
+            <li class="nav-item dropdown">
+                <a href="#" class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    ALGORITHM
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <li><a class="dropdown-item" href="algorithmfront.html">Algorithm</a></li>
+                    <li><a class="dropdown-item" href="sortingalgorithmfront.html">Sorting Algorithm</a></li>
+                    
+                </ul>
+            </li>
+
+            <li><a href="pseudocodefront.html" class="nav-link">PSEUDOCODE</a></li>
+            <li><a href="arrayFRONT.html" class="nav-link">ARRAY</a></li>
+            <li><a href="queuesFRONT.html" class="nav-link">QUEUES</a></li>
+            <li><a href="stackfront.html" class="nav-link">STACK</a></li>
+            <li><a href="treefront.html" class="nav-link">TREES</a></li>
+            
+        </ul>
+    </nav>
+
+
+
+   
+    <!-- Header -->
+    <header class="text-center my-4">
+        <h1 class="display-4">Inorder</h1>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container my-4">
+        <!-- Section 1: Arrays -->
+        <section id="sorting" class="mb-5">
+            <h2 class="text-success">(LEFT - ROOT - RIGHT)</h2>
+            <div class="row align-items-center mb-4">
+                <div class="col-md-4">
+                    <img src="image/inorder.webp" alt="Example of Arrays" class="img-fluid rounded shadow" id="zoomImage"><br><br>
+                  
+                </div>
+                <div class="col-md-8">
+                    <p><span>Inorder traversal</span> is a depth-first search algorithm that visits the nodes of a tree in a specific order, resulting in a sorted output: <br><br>
+                        <span>Order</span>: The nodes are visited in order from lowest to highest value. <br>
+                        <span>Traversal</span>: The left subtree is visited first, then the root node, and finally the right subtree.<br> 
+                        <span>Output</span>: The output is the contents of the tree in sorted order. <br>                       
+                        Inorder traversal is commonly used for binary search trees. It's a popular way to construct binary search trees, and can also be used to find the kth smallest element in a binary search tree.</p>
+                </div>
+            </div>
+        </section>
+
+        <header class="text-center my-4">
+            <h1 class="display-4">Python Implementation</h1>
+        </header>
+    <textarea id="code" placeholder="Input the codes here!">
+    class Node:
+        def __init__(self, value):
+            self.value = value
+            self.left = None
+            self.right = None
+    
+    def in_order_fixed(root, n, count):
+        if root and count[0] < n:
+            in_order_fixed(root.left, n, count)
+            if count[0] < n:
+                print(root.value, end=" ")
+                count[0] += 1
+            in_order_fixed(root.right, n, count)
+    
+    
+    root = Node(1)
+    root.left = Node(2)
+    root.right = Node(3)
+    root.left.left = Node(4)
+    root.left.right = Node(5)
+    
+    
+    print("In-order traversal with 5 nodes:")
+    max_nodes = 5
+    in_order_fixed(root, max_nodes, [0])
+    
+    
+    </textarea>
+    <button onclick="runPythonCode()">RUN</button>
+    <div id="output">Loading</div>
+    
+    <script>
+    let pyodideReady = false;
+    let pyodide;
+    
+    async function loadPyodideInstance() {
+      pyodide = await loadPyodide();
+      pyodideReady = true;
+      document.getElementById('output').textContent = "Output:";
+    }
+    
+    loadPyodideInstance();
+    
+    async function runPythonCode() {
+      const outputElement = document.getElementById("output");
+      const code = document.getElementById("code").value;
+    
+      outputElement.textContent = "Loading...";
+    
+      if (!pyodideReady) {
+        outputElement.textContent = "Loading...";
+        return;
+      }
+    
+      try {
+        pyodide.runPython(`
+    import sys
+    from io import StringIO
+    
+    output = StringIO()
+    sys.stdout = output
+    sys.stderr = output
+        `);
+    
+        await pyodide.runPythonAsync(code);
+    
+        const result = pyodide.runPython('output.getvalue()');
+        outputElement.textContent = result;
+      } catch (error) {
+        outputElement.textContent = "Error: " + error.message;
+      }
+    }
+    </script>
+
+    <div class="button-container">
+        <button class="prev" onclick="window.location.href='tree.html'">Previous</button>
+        <button class="next" onclick="window.location.href='postorder.html'">Next</button>
+      </div>
+       
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

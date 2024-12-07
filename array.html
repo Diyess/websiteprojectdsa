@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Structures - Arrays and Linked Lists</title>
+    <!-- Bootstrap CSS -->
+    <script src="https://cdn.jsdelivr.net/pyodide/v0.23.4/full/pyodide.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="array.css">
+</head>
+<body>
+    
+    <nav> 
+        <img src="" alt="">
+        <ul class="nav">
+            <li><a href="home.html" class="nav-link">HOME</a></li>
+            <li class="nav-item dropdown">
+                <a href="#" class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    LIST
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <li><a class="dropdown-item" href="singlyfront.html">Singly Linked List</a></li>
+                    <li><a class="dropdown-item" href="doublyfront.html">Doubly Linked List</a></li>
+                    <li><a class="dropdown-item" href="circularfront.html">Circular Linked List</a></li>
+                </ul>
+            </li>
+            <li class="nav-item dropdown">
+                <a href="#" class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    ALGORITHM
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <li><a class="dropdown-item" href="algorithmfront.html">Algorithm</a></li>
+                    <li><a class="dropdown-item" href="sortingalgorithmfront.html">Sorting Algorithm</a></li>
+                    
+                </ul>
+            </li>
+
+            <li><a href="pseudocodefront.html" class="nav-link">PSEUDOCODE</a></li>
+            <li><a href="arrayFRONT.html" class="nav-link">ARRAY</a></li>
+            <li><a href="queuesFRONT.html" class="nav-link">QUEUES</a></li>
+            <li><a href="stackfront.html" class="nav-link">STACK</a></li>
+            <li><a href="treefront.html" class="nav-link">TREES</a></li>
+            
+        </ul>
+    </nav>
+
+    <header class="text-center my-4">
+        <h1 class="display-4">Array</h1>
+    </header>
+
+    <!-- Main Content -->
+    
+    <!-- Main Content -->
+    <div class="container my-4">
+        <!-- Section 1: Arrays -->
+        <section id="sorting" class="mb-5">
+            <h2 class="text-success">What is Array?</h2>
+            <div class="row align-items-center mb-4">
+                <div class="col-md-4">
+                    <img src="image/array1.jpg" alt="Example of Arrays" class="img-fluid rounded shadow" id="zoomImage"><br><br>
+                </div>
+                <div class="col-md-8">
+                    <p>An <span>array</span> is a data structure used to store multiple
+                        elements.<br>
+                        • Arrays are <span>used by many algorithms</span>.<br>
+                        • Arrays are <span>indexed</span>, meaning that each element in the array
+                        has an index, a number that says where in the array the
+                        element is located.</p>
+                </div>
+            </div>
+        </section>
+
+        <header class="text-center my-4">
+            <h1 class="display-4">Python Implementation</h1>
+        </header>
+  <textarea id="code" placeholder="Input the codes here!">
+numbers = [1, 2, 3, 4, 5]
+
+print("Array:", numbers)
+
+numbers.append(6)
+print("After adding 6:", numbers)
+
+numbers.remove(3)
+print("After removing 3:", numbers)
+
+print("Element at index 2:", numbers[2])</textarea>
+  <button onclick="runPythonCode()">RUN</button>
+  <div id="output">Loading</div>
+
+  <script>
+    let pyodideReady = false;
+    let pyodide;
+
+    async function loadPyodideInstance() {
+      pyodide = await loadPyodide();
+      pyodideReady = true;
+      document.getElementById('output').textContent = "Output:";
+    }
+
+    loadPyodideInstance();
+
+    async function runPythonCode() {
+      const outputElement = document.getElementById("output");
+      const code = document.getElementById("code").value;
+
+      outputElement.textContent = "Loading...";
+
+      if (!pyodideReady) {
+        outputElement.textContent = "Loading...";
+        return;
+      }
+
+      try {
+        pyodide.runPython(`
+import sys
+from io import StringIO
+
+output = StringIO()
+sys.stdout = output
+sys.stderr = output
+        `);
+
+        await pyodide.runPythonAsync(code);
+
+        const result = pyodide.runPython('output.getvalue()');
+        outputElement.textContent = result;
+      } catch (error) {
+        outputElement.textContent = "Error: " + error.message;
+      }
+    }
+  </script>
+        
+
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

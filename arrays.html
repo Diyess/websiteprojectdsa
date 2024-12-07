@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Python vs Python</title>
+  <script src="https://cdn.jsdelivr.net/pyodide/v0.23.4/full/pyodide.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px auto;
+      padding: 0 20px;
+      max-width: 800px;
+      background-color: #eaeaea;
+      color: #333;
+    }
+
+    h1 {
+        font-family: 'Courier New', Courier, monospace;
+        text-align: center;
+        font-size: 24px;
+        margin-bottom: 20px;
+      }
+    
+      textarea {
+        width: 100%;
+        height: 200px;
+        font-family: monospace;
+        font-size: 16px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        margin-bottom: 10px;
+        padding: 10px;
+        background-color: #fff;
+        color: #333;
+        resize: none;
+      }
+    
+      button {
+        display: block;
+        width: 100%;
+        padding: 12px 20px;
+        background-color: #333;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 16px;
+      }
+    
+      button:hover {
+        background-color: #555;
+      }
+    
+      #output {
+        margin-top: 20px;
+        padding: 10px;
+        background-color: #fff;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        height: 150px;
+        overflow-y: auto;
+        font-family: monospace;
+        color: #333;
+        white-space: pre-wrap;
+      }
+    
+      footer {
+        text-align: center;
+        margin-top: 20px;
+        font-size: 12px;
+        color: #666;
+      }
+    
+    
+      button {
+        background-color: #007bff; /* Green background */
+        color: white; /* White text */
+        border: none; /* Remove border */
+        width: 150px; /* Set button width */
+        height: 60px; /* Set button height */
+        text-align: center; /* Center text */
+        text-decoration: none; /* Remove underline */
+        display: inline-block; /* Inline-block element */
+        font-size: 14px; /* Set font size */
+        margin: 4px 2px; /* Add some margin */
+        cursor: pointer; /* Add pointer cursor on hover */
+        border-radius: 5px; /* Rounded corners */
+        transition: background-color 0.3s ease; /* Smooth transition */
+      }
+      
+      button:hover {
+        background-color: #45a049; /* Darker green on hover */
+      }
+      
+      button:active {
+        background-color: #3e8e41; /* Even darker green when clicked */
+        box-shadow: 0 5px #666; /* Add shadow on click */
+        transform: translateY(4px); /* Slightly move down on click */
+      }
+  </style>
+</head>
+
+<body>
+    <header class="text-center my-4">
+        <h1 class="display-4">Python Implementation</h1>
+    </header>
+<textarea id="code" placeholder="Input the codes here!">
+class Node:
+  def __init__(self, data):
+      self.data = data
+      self.next = None
+
+class LinkedList:
+  def __init__(self):
+      self.head = None
+
+  def append(self, data):
+      new_node = Node(data)
+      if self.head is None:
+          self.head = new_node
+      else:
+          current = self.head
+          while current.next:
+              current = current.next
+          current.next = new_node
+
+  def display(self):
+      current = self.head
+      while current:
+          print(current.data, end=" -> ")
+          current = current.next
+      print("None")
+
+llist = LinkedList()
+llist.append(10)
+llist.append(20)
+llist.append(30)
+
+llist.display()
+
+</textarea>
+<button onclick="runPythonCode()">RUN</button>
+<div id="output">Loading</div>
+
+<script>
+let pyodideReady = false;
+let pyodide;
+
+async function loadPyodideInstance() {
+  pyodide = await loadPyodide();
+  pyodideReady = true;
+  document.getElementById('output').textContent = "Output:";
+}
+
+loadPyodideInstance();
+
+async function runPythonCode() {
+  const outputElement = document.getElementById("output");
+  const code = document.getElementById("code").value;
+
+  outputElement.textContent = "Loading...";
+
+  if (!pyodideReady) {
+    outputElement.textContent = "Loading...";
+    return;
+  }
+
+  try {
+    pyodide.runPython(`
+import sys
+from io import StringIO
+
+output = StringIO()
+sys.stdout = output
+sys.stderr = output
+    `);
+
+    await pyodide.runPythonAsync(code);
+
+    const result = pyodide.runPython('output.getvalue()');
+    outputElement.textContent = result;
+  } catch (error) {
+    outputElement.textContent = "Error: " + error.message;
+  }
+}
+</script>
+    
+</body>
+</html>

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python Compiler</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #2e2e2e;
+            color: #f8f9fa;
+            margin: 20px;
+            font-family: 'Courier New', Courier, monospace;
+        }
+        .container {
+            display: flex;
+            flex-direction: row-reverse;
+            align-items: flex-start;
+        }
+        textarea {
+            width: 100%;
+            height: 300px;
+            font-family: monospace;
+            font-size: 16px;
+            background-color: #1e1e1e;
+            color: #f8f9fa;
+            border: 1px solid #444;
+            margin-bottom: 10px;
+            padding: 10px;
+        }
+        pre {
+            background-color: #1e1e1e;
+            color: #f8f9fa;
+            border: 1px solid #444;
+            padding: 10px;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            height: 150px;
+            overflow-y: auto;
+            width: 100%;
+        }
+        .code-container {
+            display: flex;
+            flex-direction: column;
+            width: 50%;
+        }
+        .line-numbers {
+            width: 40px;
+            background-color: #2e2e2e;
+            color: #666;
+            text-align: right;
+            padding-right: 10px;
+            border-right: 1px solid #444;
+        }
+        .output-container {
+            width: 50%;
+            margin-left: 10px;
+        }
+        h1 {
+            text-align: center;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="output-container">
+            <h3>Output:</h3>
+            <pre id="output">Output will appear here...</pre>
+        </div>
+        <div class="code-container">
+            <h1>Python Compiler</h1>
+            <div class="line-numbers" id="lineNumbers"></div>
+            <textarea id="code" placeholder="Write your Python code here..."></textarea>
+            <button id="runButton" class="btn btn-primary w-100 mb-3">Run Code</button>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/pyodide/v0.22.1/full/pyodide.js"></script>
+    <script>
+        let pyodide;
+
+        async function initializePyodide() {
+            pyodide = await loadPyodide();
+            console.log("Pyodide is ready!");
+        }
+
+        initializePyodide();
+
+        function updateLineNumbers() {
+            const codeArea = document.getElementById('code');
+            const lines = codeArea.value.split('\n').length;
+            let numbers = '';
+            for (let i = 1; i <= lines; i++) {
+                numbers += i + '\n';
+            }
+            document.getElementById('lineNumbers').textContent = numbers;
+        }
+
+        document.getElementById('code').addEventListener('input', updateLineNumbers);
+        updateLineNumbers(); // Initial call to set line numbers
+
+        document.getElementById("runButton").addEventListener("click", async () => {
+            const code = document.getElementById("code").value;
+            const outputElement = document.getElementById("output");
+            outputElement.textContent = "Running...";
+
+            if (!pyodide) {
+                outputElement.textContent = "Pyodide is not ready yet. Please try again later.";
+                return;
+            }
+
+            try {
+                const result = await pyodide.runPythonAsync(code);
+                outputElement.textContent = result || "No output.";
+            } catch (error) {
+                outputElement.textContent = `Error: ${error.message}`;
+            }
+        });
+    </script>
+</body>
+</html>

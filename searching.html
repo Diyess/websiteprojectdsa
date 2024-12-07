@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Structures - Arrays and Linked Lists</title>
+    <!-- Bootstrap CSS -->
+    <script src="https://cdn.jsdelivr.net/pyodide/v0.23.4/full/pyodide.js"></script>s
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="searching.css">
+</head>
+<body>
+    
+    <nav> 
+        <img src="" alt="">
+        <ul class="nav">
+            <li><a href="home.html" class="nav-link">HOME</a></li>
+            <li class="nav-item dropdown">
+                <a href="#" class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    LIST
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <li><a class="dropdown-item" href="singlyfront.html">Singly Linked List</a></li>
+                    <li><a class="dropdown-item" href="doublyfront.html">Doubly Linked List</a></li>
+                    <li><a class="dropdown-item" href="circularfront.html">Circular Linked List</a></li>
+                </ul>
+            </li>
+            <li class="nav-item dropdown">
+                <a href="#" class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    ALGORITHM
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <li><a class="dropdown-item" href="algorithmfront.html">Algorithm</a></li>
+                    <li><a class="dropdown-item" href="sortingalgorithmfront.html">Sorting Algorithm</a></li>
+                    
+                </ul>
+            </li>
+
+            <li><a href="pseudocodefront.html" class="nav-link">PSEUDOCODE</a></li>
+            <li><a href="arrayFRONT.html" class="nav-link">ARRAY</a></li>
+            <li><a href="queuesFRONT.html" class="nav-link">QUEUES</a></li>
+            <li><a href="stackfront.html" class="nav-link">STACK</a></li>
+            <li><a href="treefront.html" class="nav-link">TREES</a></li>
+            
+        </ul>
+    </nav>
+
+   
+
+    <!-- Header -->
+    <header class="text-center my-4">
+        <h1 class="display-4">Five Examples of Algorithm</h1>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container my-4">
+        <!-- Section 1: Arrays -->
+        <section id="sorting" class="mb-5">
+            <h2 class="text-success">Searching Algorithm</h2>
+            <div class="row align-items-center mb-4">
+                <div class="col-md-4">
+                    <img src="image/search1.gif" alt="Example of Arrays" class="img-fluid rounded shadow" id="zoomImage"><br><br>
+                </div>
+                <div class="col-md-8">
+                    <p>A <span>searching algorithm</span> is a method used to find a specific value or element within a collection, such as an array or list. The main goal is to locate the target item or determine its absence.<br>
+
+                        <br><span>The key points are:</span><br><br>
+                        
+                        <span>Efficiency</span>: Determines how quickly the algorithm can find the item, especially in large datasets.
+                        <br><span>Types</span>: Common types include Linear Search (sequential checking) and Binary Search (dividing the dataset in half).
+                        <br><span>Importance</span>: A well-designed searching algorithm can improve performance, particularly in tasks like data retrieval or problem-solving.</p>
+                </div>
+            </div>
+        </section>
+        <header class="text-center my-4">
+            <h1 class="display-4">Python Implementation</h1>
+        </header>
+    <textarea id="code" placeholder="Input the codes here!">
+    def linear_search(arr, target):
+        for i in range(len(arr)):
+            if arr[i] == target:
+                return i 
+        return -1  
+    
+    arr = [10, 20, 30, 40, 50]
+    target = 30
+    result = linear_search(arr, target)
+    print(f"Element found at index: {result}" if result != -1 else "Element not found")
+    
+    </textarea>
+    <button onclick="runPythonCode()">RUN</button>
+    <div id="output">Loading</div>
+    
+    <script>
+    let pyodideReady = false;
+    let pyodide;
+    
+    async function loadPyodideInstance() {
+      pyodide = await loadPyodide();
+      pyodideReady = true;
+      document.getElementById('output').textContent = "Output:";
+    }
+    
+    loadPyodideInstance();
+    
+    async function runPythonCode() {
+      const outputElement = document.getElementById("output");
+      const code = document.getElementById("code").value;
+    
+      outputElement.textContent = "Loading...";
+    
+      if (!pyodideReady) {
+        outputElement.textContent = "Loading...";
+        return;
+      }
+    
+      try {
+        pyodide.runPython(`
+    import sys
+    from io import StringIO
+    
+    output = StringIO()
+    sys.stdout = output
+    sys.stderr = output
+        `);
+    
+        await pyodide.runPythonAsync(code);
+    
+        const result = pyodide.runPython('output.getvalue()');
+        outputElement.textContent = result;
+      } catch (error) {
+        outputElement.textContent = "Error: " + error.message;
+      }
+    }
+    </script>
+
+    <div class="button-container">
+        <button class="prev" onclick="window.location.href='dynamic.html'">Previous</button>
+      
+      </div>
+        
+
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

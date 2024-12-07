@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enhanced Algorithm Page</title>
+    <script src="https://cdn.jsdelivr.net/pyodide/v0.23.4/full/pyodide.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="singly.css">
+    
+</head>
+<body>
+    <nav> 
+        <img src="" alt="">
+        <ul class="nav">
+            <li><a href="home.html" class="nav-link">HOME</a></li>
+            <li class="nav-item dropdown">
+                <a href="#" class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    LIST
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <li><a class="dropdown-item" href="singlyfront.html">Singly Linked List</a></li>
+                    <li><a class="dropdown-item" href="doublyfront.html">Doubly Linked List</a></li>
+                    <li><a class="dropdown-item" href="circularfront.html">Circular Linked List</a></li>
+                </ul>
+            </li>
+            <li class="nav-item dropdown">
+                <a href="#" class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    ALGORITHM
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <li><a class="dropdown-item" href="algorithmfront.html">Algorithm</a></li>
+                    <li><a class="dropdown-item" href="sortingalgorithmfront.html">Sorting Algorithm</a></li>
+                    
+                </ul>
+            </li>
+
+            <li><a href="pseudocodefront.html" class="nav-link">PSEUDOCODE</a></li>
+            <li><a href="arrayFRONT.html" class="nav-link">ARRAY</a></li>
+            <li><a href="queuesFRONT.html" class="nav-link">QUEUES</a></li>
+            <li><a href="stackfront.html" class="nav-link">STACK</a></li>
+            <li><a href="treefront.html" class="nav-link">TREES</a></li>
+            
+        </ul>
+    </nav>
+
+    <div class="container my-5">
+        <div id="queueCarousel" class="carousel slide" data-bs-ride="false">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <div class="card shadow-lg">
+                        <div class="card-body">
+                            <h1 class="display-5 text-primary">Singly Linked List</h1><br><br><br>
+                            <p class="lead">A <span>singly linked list</span>is the simplest kind of linked lists. 
+                                
+                               <br> It takes up<span> less space in memory </span>because each node 
+                               has only <span>one address to the next node</span>, like in the 
+                               image below.</p>
+                           
+                        </div>
+                    </div>
+                </div>
+            
+                <div class="carousel-item">
+                    <div class="card shadow-lg">
+                        <div class="card-body">
+                            <h1 class="display-5 text-primary">Singly Linked List</h1>
+                           
+                            <img src="image/SinglyList.png" class="img-fluid rounded mt-3" alt="Queue applications">
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+           
+            <button class="carousel-control-prev" type="button" data-bs-target="#queueCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#queueCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    </div>
+
+    <header class="text-center my-4">
+        <h1 class="display-4">Python Implementation</h1>
+    </header>
+<textarea id="code" placeholder="Input the codes here!">
+class Node:
+  def __init__(self, data):
+      self.data = data
+      self.next = None
+
+class LinkedList:
+  def __init__(self):
+      self.head = None
+
+  def append(self, data):
+      new_node = Node(data)
+      if self.head is None:
+          self.head = new_node
+      else:
+          current = self.head
+          while current.next:
+              current = current.next
+          current.next = new_node
+
+  def display(self):
+      current = self.head
+      while current:
+          print(current.data, end=" ---> ")
+          current = current.next
+      print("None")
+
+llist = LinkedList()
+llist.append(10)
+llist.append(20)
+llist.append(30)
+
+llist.display()
+
+</textarea>
+<button onclick="runPythonCode()">RUN</button>
+<div id="output">Loading</div>
+
+<script>
+let pyodideReady = false;
+let pyodide;
+
+async function loadPyodideInstance() {
+  pyodide = await loadPyodide();
+  pyodideReady = true;
+  document.getElementById('output').textContent = "Output:";
+}
+
+loadPyodideInstance();
+
+async function runPythonCode() {
+  const outputElement = document.getElementById("output");
+  const code = document.getElementById("code").value;
+
+  outputElement.textContent = "Loading...";
+
+  if (!pyodideReady) {
+    outputElement.textContent = "Loading...";
+    return;
+  }
+
+  try {
+    pyodide.runPython(`
+import sys
+from io import StringIO
+
+output = StringIO()
+sys.stdout = output
+sys.stderr = output
+    `);
+
+    await pyodide.runPythonAsync(code);
+
+    const result = pyodide.runPython('output.getvalue()');
+    outputElement.textContent = result;
+  } catch (error) {
+    outputElement.textContent = "Error: " + error.message;
+  }
+}
+</script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
